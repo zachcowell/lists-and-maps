@@ -3,6 +3,9 @@ var express = require('express'),
 	api = require('./routes/api.js'),
 	http = require('http'),
 	path = require('path'),
+	Sequelize = require('sequelize'), 
+	sequelize = new Sequelize('LAM', 'root', '')
+	User = require('./models/user.js'),
 	app = module.exports = express();
 
 var env = 'development';
@@ -35,6 +38,28 @@ app.get('/', routes.index);
 app.get('/search', api.yelpSearch);
 
 app.get('*', routes.index);
+
+
+
+
+
+ 
+sequelize.sync().success(function() {
+  User.create({
+	  id: null,
+	  email: "sdf",
+	  username: "sdvff",
+	  last_name: "sdf",
+	  first_name: "sdf",
+	  password: "sdf",
+	  created_on : new Date(1986,11,08),
+	  last_login: new Date(1986,11,08) 
+  }).success(function(sdepold) {
+    console.log(sdepold.values)
+  })
+})
+
+
 
 
 http.createServer(app).listen(app.get('port'), function () { 

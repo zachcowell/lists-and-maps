@@ -10,6 +10,7 @@
     "express": "3.5.2",
     "jade": "latest",
     "mysql" : "latest",
+    "sequelize" : "1.7.8",
     "underscore": "latest",
     "request": "latest",
     "yelp": "~0.1.1",
