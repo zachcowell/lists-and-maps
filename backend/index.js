@@ -1,43 +1,14 @@
-var express = require('express'),
-	routes = require('./routes'),
-	api = require('./routes/api.js'),
-	http = require('http'),
-	path = require('path'),
-	Sequelize = require('sequelize'),
-  	sequelize = new Sequelize('LAM', 'root', ''),
-	Admin = sequelize.import("./models/admin.js"), 
-	Itinerary = sequelize.import("./models/itinerary.js"), 
-	ItineraryItem = sequelize.import("./models/itinerary_item.js"), 
-	List = sequelize.import("./models/list.js"), 
-	ListItem = sequelize.import("./models/list_item.js"), 
-	Logs = sequelize.import("./models/logs.js"), 
-	Place = sequelize.import("./models/place.js"), 
-	User = sequelize.import("./models/user.js"), 
-	UserPreferences = sequelize.import("./models/user_preferences.js"), 
-	app = module.exports = express();
+var express = 			require('express'),
+	routes = 			require('./routes'),
+	api = 				require('./routes/api.js'),
+	http = 				require('http'),
+	path = 				require('path'),
+	Sequelize = 		require('sequelize'),
+  	sequelize = 		new Sequelize('LAM', 'root', ''),
+	//models = 			require('./models'),
+	app =				module.exports = express();
 
 var env = 'development';
-
-/*
-User.hasMany(models.Itinerary),
-User.hasMany(models.List),
-User.hasMany(models.Logs),
-User.hasMany(models.Admin),
-User.hasOne(models.UserPreferences)
-Itinerary.hasMany(models.ItineraryItem),
-Itinerary.belongsTo(models.User)
-ItineraryItem.hasOne(models.Place),
-ItineraryItem.belongsTo(models.Itinerary)
-Place.belongsTo(models.ListItem),
-Place.belongsTo(models.ItineraryItem)
-ListItem.belongsTo(models.List),
-ListItem.hasOne(models.Place)
-List.hasMany(models.ListItem),
-List.belongsTo(models.User)
-Admin.belongsTo(models.User)
-UserPreferences.belongsTo(models.User)
-Logs.belongsTo(models.User)
-*/
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -51,6 +22,7 @@ app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
+	app.set('models', require('./models'));
 	app.use(allowCrossDomain);
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
@@ -64,10 +36,17 @@ app.get('/', routes.index);
 app.get('/search', api.yelpSearch);
 app.get('*', routes.index);
 
+var User = app.get('models').User;
+var Itinerary = app.get('models').Itinerary;
+var List = app.get('models').List;
+var ListItem = app.get('models').ListItem;
 
 
+//include: [ { model: Division, include: [ Department ] } ],
+User.findAll({ include: [ { model: List, include: [ListItem] } ] }).success(function(users) {
+  console.log(JSON.stringify(users));
+});
 
- 
 sequelize.sync().success(function() {
   /*User.create({
 	  id: null,
