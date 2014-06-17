@@ -17,4 +17,4 @@ exports.findAllUsers = function(req,res){
 	});
 }
 
-exports.responseTest = function(req,res){ res.send("Success"); }
+exports.responseTest = function(req,res){ res.send("What"); }

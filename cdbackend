@@ -1,0 +1,4 @@
+#!/bin/sh
+# file : /scripts/cdjava
+#
+cd /vagrant/backend
