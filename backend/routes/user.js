@@ -16,3 +16,5 @@ exports.findAllUsers = function(req,res){
 	  res.send(JSON.stringify(users));
 	});
 }
+
+exports.responseTest = function(req,res){ res.send("Success"); }

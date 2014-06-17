@@ -1,1 +1,4 @@
-#!/usr/bin/env bash gem install librarian-chef librarian-chef install vagrant up
+#!/usr/bin/env bash 
+gem install librarian-chef 
+librarian-chef install 
+vagrant up

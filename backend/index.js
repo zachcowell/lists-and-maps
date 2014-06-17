@@ -36,6 +36,7 @@ if (env === 'development') { app.use(express.errorHandler()); }
 app.get('/', routes.index);
 app.get('/search', api.yelpSearch);
 app.get('/find', userAPI.findAllUsers);
+app.get('/test', userAPI.responseTest);
 app.get('*', routes.index);
 
 
