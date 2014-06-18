@@ -1,4 +1,5 @@
 #!/usr/bin/env bash 
 npm install -g supervisor
-alias cdbackend='. /vagrant/cdbackend'
-nohup supervisor index.js &
+cd /vagrant/backend
+npm install
+nohup supervisor index.js 0<&- &>/dev/null &
