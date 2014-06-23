@@ -1,5 +1,8 @@
 var Sequelize = require('sequelize'),
-    sequelize = new Sequelize('LAM', 'root', '');
+    sequelize = new Sequelize('kaicow', 'postgres', 'password', {
+      dialect: "postgres", 
+      port:    5432
+    });
 
 //All the models
 var models = [

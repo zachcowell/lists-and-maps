@@ -1,15 +1,17 @@
 var express = 			require('express'),
-	routes = 			require('./routes'),
-	api = 				require('./routes/api.js'),	
-	userAPI = 			require('./routes/user.js'),
+	passport = 			require('passport'),
 	http = 				require('http'),
 	path = 				require('path'),
 	Sequelize = 		require('sequelize'),
-  	sequelize = 		new Sequelize('LAM', 'root', ''),
+  	sequelize = 		new Sequelize('kaicow', 'postgres', 'password', {
+      dialect: "postgres", 
+      port:    5432
+    }),
 	app =				module.exports = express();
 
 
 var env = 'development';
+require('./config/passport')(passport);
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -24,8 +26,14 @@ app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
 	app.set('models', require('./models'));
-	app.use(allowCrossDomain);
+	app.use(express.cookieParser());
 	app.use(express.bodyParser());
+	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+	app.use(passport.initialize());
+	app.use(passport.session()); // persistent login sessions
+
+	app.use(allowCrossDomain);
+
 	app.use(express.methodOverride());
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(app.router);
@@ -33,14 +41,12 @@ app.configure(function(){
 
 if (env === 'development') { app.use(express.errorHandler()); }
 
-app.get('/', routes.index);
-app.get('/search', api.yelpSearch);
-app.get('/find', userAPI.findAllUsers);
-app.get('/test', userAPI.responseTest);
-app.get('*', routes.index);
 
 
+//app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });
 
+
+require('./routes.js')(app, passport);
 
 
 http.createServer(app).listen(app.get('port'), function () { 

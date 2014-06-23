@@ -9,7 +9,7 @@
   "dependencies": {
     "express": "3.5.2",
     "jade": "latest",
-    "mysql" : "latest",
+    "pg" : "latest",
     "sequelize" : "1.7.8",
     "underscore": "latest",
     "request": "latest",

@@ -1,7 +1,8 @@
 module.exports = function(sequelize, Sequelize) {
-  var User = sequelize.define('user', {
+  var User = sequelize.define('app_user', {
     id: Sequelize.BIGINT,
     email: Sequelize.STRING,
+    facebook_id: Sequelize.BIGINT,
     username: Sequelize.STRING,
     last_name: Sequelize.STRING,
     first_name: Sequelize.STRING,
@@ -11,7 +12,7 @@ module.exports = function(sequelize, Sequelize) {
   }, 
   {
     freezeTableName:true,
-    tableName: 'user',
+    tableName: 'app_user',
     timestamps: false
   })
 
