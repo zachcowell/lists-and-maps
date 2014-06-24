@@ -2,6 +2,8 @@ DROP TABLE admin CASCADE
 ;
 DROP TABLE app_user CASCADE
 ;
+DROP SEQUENCE  app_user_id_seq
+;
 DROP TABLE itinerary CASCADE
 ;
 DROP TABLE itinerary_item CASCADE
@@ -23,14 +25,16 @@ CREATE TABLE admin (
 )
 ;
 
+CREATE SEQUENCE app_user_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE app_user ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('app_user_id_seq'::text)::regclass) NOT NULL,
 	email varchar(120),
 	facebook_id bigint,
 	username varchar(30) NOT NULL,
 	last_name varchar(40),
 	first_name varchar(40),
-	password varchar(36) NOT NULL,
 	created_on timestamp(0) NOT NULL,
 	last_login timestamp(0)
 )

@@ -2,7 +2,19 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User       = require('../models/user');
 var configAuth = require('./auth');
 
-module.exports = function(passport) {
+
+var getModels = function(req){
+	var m = require('../models');
+	return {
+		User : m.User,
+		Itinerary : m.Itinerary,
+		List : m.List,
+		ListItem : m.ListItem
+	}
+};
+
+module.exports = function(passport,req) {
+	var User = getModels().User;
 
 	// used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -11,9 +23,9 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+        User.find({ where: { id: id } }).success(function(){
+        	done(null,id);
+        })
     });
     
     passport.use(new FacebookStrategy({
@@ -36,12 +48,12 @@ module.exports = function(passport) {
 					username: profile.emails[0].value,
 					last_name: profile.name.familyName,
 					first_name: profile.name.givenName,
-					password: null,
 					created_on : new Date(),
 					last_login: new Date()
 				})
 				.success(function(user, created) { 
 					console.log(user.values);
+					done(null,user);
 				})
 			// find the user in the database based on their facebook id
 	        /*User.findOne({ 'facebook.id' : profile.id }, function(err, user) {

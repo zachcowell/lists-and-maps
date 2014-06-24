@@ -5,7 +5,8 @@ var express = 			require('express'),
 	Sequelize = 		require('sequelize'),
   	sequelize = 		new Sequelize('kaicow', 'postgres', 'password', {
       dialect: "postgres", 
-      port:    5432
+      port:    5432,
+      omitNull: true
     }),
 	app =				module.exports = express();
 
