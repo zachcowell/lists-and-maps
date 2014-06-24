@@ -4,9 +4,9 @@ var express = 			require('express'),
 	path = 				require('path'),
 	Sequelize = 		require('sequelize'),
   	sequelize = 		new Sequelize('kaicow', 'postgres', 'password', {
-      dialect: "postgres", 
-      port:    5432,
-      omitNull: true
+							dialect: "postgres", 
+							port:    5432,
+							omitNull: true
     }),
 	app =				module.exports = express();
 
@@ -41,11 +41,6 @@ app.configure(function(){
 });
 
 if (env === 'development') { app.use(express.errorHandler()); }
-
-
-
-//app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });
-
 
 require('./routes.js')(app, passport);
 

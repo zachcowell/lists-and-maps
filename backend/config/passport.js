@@ -2,7 +2,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User       = require('../models/user');
 var configAuth = require('./auth');
 
-
 var getModels = function(req){
 	var m = require('../models');
 	return {
@@ -18,23 +17,22 @@ module.exports = function(passport,req) {
 
 	// used to serialize the user for the session
     passport.serializeUser(function(user, done) {
+    	console.log('serializing...');
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         User.find({ where: { id: id } }).success(function(){
+        	console.log('deserializing...');
         	done(null,id);
         })
     });
     
     passport.use(new FacebookStrategy({
-
-		// pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
         callbackURL     : configAuth.facebookAuth.callbackURL
-
     },
 
     // facebook will send back the token and profile

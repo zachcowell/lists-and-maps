@@ -1,3 +1,5 @@
+
+
 DROP TABLE admin CASCADE
 ;
 DROP TABLE app_user CASCADE
