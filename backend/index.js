@@ -29,7 +29,7 @@ app.configure(function(){
 	app.set('models', require('./models'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser());
-	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+	app.use(express.session({ secret: 'supermegasecret' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 

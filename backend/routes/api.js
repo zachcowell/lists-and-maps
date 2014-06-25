@@ -1,8 +1,10 @@
+var configAuth = require('../config/auth');
+
 var yelp = require("yelp").createClient({
-	  consumer_key: "HMcwEHLw2Jq0_8-XyCdb7g", 
-	  consumer_secret: "lC1ED2xYxb06NRGpkqNf4lt7cvw",
-	  token: "PCsz8LpOyCr3Q7SPLYUpOg9O8znR2OzF",
-	  token_secret: "AoTZWo9ry4aeHFGFlnXCoCfs-58"
+	  consumer_key: configAuth.yelpAuth.consumer_key, 
+	  consumer_secret: configAuth.yelpAuth.consumer_secret,
+	  token: configAuth.yelpAuth.token,
+	  token_secret: configAuth.yelpAuth.token_secret
 	});
 
 

@@ -1,12 +1,23 @@
 var routes = 	require('./routes'),
 	api = 		require('./routes/api.js'),	
-	userAPI = 	require('./routes/user.js');
+	userAPI = 	require('./routes/user.js'),
+	listAPI = 	require('./routes/list.js');
 
 module.exports = function(app, passport) {
+	// route middleware to make sure a user is logged in
+	var isLoggedIn = function(req, res, next) {
+		// if user is authenticated in the session, carry on
+		if (req.isAuthenticated()) { return next(); }
+		// if they aren't redirect them to the home page
+		res.redirect('/');
+	}
+
 	app.get('/', function(req, res) { res.send("root; make a selection"); });
-	//app.get('/search', api.yelpSearch);
+	app.get('/search', isLoggedIn, api.yelpSearch);
 	app.get('/find', userAPI.findAllUsers);
 	//app.get('*', routes.index);
+
+	app.get('/lists',isLoggedIn,listAPI.findLists);
 	
 	app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });
 	app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -21,14 +32,5 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
 
-	// if user is authenticated in the session, carry on
-	if (req.isAuthenticated())
-		return next();
-
-	// if they aren't redirect them to the home page
-	res.redirect('/');
-}
 }
