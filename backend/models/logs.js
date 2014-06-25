@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
   var Logs = sequelize.define('logs', {
-    id: Sequelize.BIGINT,
+    //id: Sequelize.BIGINT,
     logged_at: Sequelize.DATE,
     route_id: Sequelize.STRING,
     user_id: Sequelize.BIGINT,

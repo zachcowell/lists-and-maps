@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
   var Place = sequelize.define('place', {
-    id: Sequelize.BIGINT,
+    //id: Sequelize.BIGINT,
     name: Sequelize.STRING,
     street_address1: Sequelize.STRING,
     street_address2: Sequelize.STRING,

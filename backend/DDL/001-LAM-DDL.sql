@@ -1,3 +1,6 @@
+USE DATABASE kaicow
+;
+
 
 
 DROP TABLE admin CASCADE
@@ -8,17 +11,31 @@ DROP SEQUENCE  app_user_id_seq
 ;
 DROP TABLE itinerary CASCADE
 ;
+DROP SEQUENCE  itinerary_id_seq
+;
 DROP TABLE itinerary_item CASCADE
+;
+DROP SEQUENCE  itinerary_item_id_seq
 ;
 DROP TABLE list CASCADE
 ;
+DROP SEQUENCE  list_id_seq
+;
 DROP TABLE list_item CASCADE
+;
+DROP SEQUENCE  list_item_id_seq
 ;
 DROP TABLE logs CASCADE
 ;
+DROP SEQUENCE  logs_id_seq
+;
 DROP TABLE place CASCADE
 ;
+DROP SEQUENCE  place_id_seq
+;
 DROP TABLE user_preferences CASCADE
+;
+DROP SEQUENCE  user_preferences_id_seq
 ;
 
 CREATE TABLE admin ( 
@@ -42,44 +59,60 @@ CREATE TABLE app_user (
 )
 ;
 
+CREATE SEQUENCE itinerary_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE itinerary ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('itinerary_id_seq'::text)::regclass) NOT NULL,
 	user_id bigint NOT NULL,
 	is_public integer NOT NULL,
-	is_shared integer,
-	is_deleted integer NOT NULL,
+	is_shared boolean,
+	is_deleted boolean NOT NULL,
 	score integer DEFAULT 0,
 	name varchar(150) NOT NULL
 )
 ;
 
+CREATE SEQUENCE itinerary_item_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE itinerary_item ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('itinerary_item_id_seq'::text)::regclass) NOT NULL,
 	place_id bigint NOT NULL,
 	itinerary_id bigint NOT NULL,
-	is_deleted integer,
+	is_deleted boolean,
 	created_on timestamp(0)
 )
 ;
 
+CREATE SEQUENCE list_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE list ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('list_id_seq'::text)::regclass) NOT NULL,
 	user_id bigint NOT NULL,
+	name varchar(50) NOT NULL,
 	created_on timestamp(0),
-	is_public integer,
-	is_deleted integer
+	is_public boolean,
+	is_deleted boolean
 )
 ;
 
+CREATE SEQUENCE list_item_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE list_item ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('list_item_id_seq'::text)::regclass) NOT NULL,
 	place_id bigint,
 	list_id bigint
 )
 ;
 
+CREATE SEQUENCE logs_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE logs ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('logs_id_seq'::text)::regclass) NOT NULL,
 	logged_at timestamp(0),
 	route_id varchar(100) NOT NULL,
 	user_id bigint NOT NULL,
@@ -88,8 +121,11 @@ CREATE TABLE logs (
 )
 ;
 
+CREATE SEQUENCE place_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE place ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('place_id_seq'::text)::regclass) NOT NULL,
 	name varchar(100),
 	street_address1 varchar(200),
 	street_address2 varchar(200),
@@ -101,12 +137,15 @@ CREATE TABLE place (
 )
 ;
 
+CREATE SEQUENCE user_preferences_id_seq INCREMENT 1 START 1
+;
+
 CREATE TABLE user_preferences ( 
-	id bigint NOT NULL,
+	id bigint DEFAULT nextval(('user_preferences_id_seq'::text)::regclass) NOT NULL,
 	user_id bigint,
-	receive_emails integer NOT NULL,
-	gps_services integer NOT NULL,
-	public_profile integer NOT NULL
+	receive_emails boolean NOT NULL,
+	gps_services boolean NOT NULL,
+	public_profile boolean NOT NULL
 )
 ;
 

@@ -1,26 +1,7 @@
 /* Contains all data access methods for lists and list-items */
+var models = require('../models');
 
-var getModels = function(req){
-	var m = require('../models');
-	return {
-		User : m.User,
-		Itinerary : m.Itinerary,
-		List : m.List,
-		ListItem : m.ListItem
-	}
-};
-
-
-
-exports.findAllUsers = function(req,res){
-	var models = getModels(req);
-	models.User.findAll({ include: [ { model: models.List, include: [models.ListItem] } ] }).success(function(users) {
-	  res.send(JSON.stringify(users));
-	});
-}
-
-exports.findLists = function(req,res){
-	var models = getModels(req);
+exports.findAllLists = function(req,res){
 	models.List.findAll({
 		where: {user_id: req.user}
 	}).success(function(lists) {
@@ -28,4 +9,17 @@ exports.findLists = function(req,res){
 		// project will be the first entry of the Projects table with the title 'aProject' || null
 		// project.title will contain the name of the project
 	});
+}
+
+exports.createList = function(req,res){
+	var newList = models.List.build({
+		user_id: parseInt(req.user),
+		name: "some list i made",
+		created_on: new Date(),
+		is_public: true,
+		is_deleted: false
+	})
+	.save()
+	.success(function(){ res.send('successfully saved newlist'); })
+	.error(function(error){res.send(error); });
 }

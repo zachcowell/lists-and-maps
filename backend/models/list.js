@@ -1,6 +1,7 @@
 module.exports = function(sequelize, Sequelize) {
   var List = sequelize.define('list', {
-    id: Sequelize.BIGINT,
+    //id: Sequelize.BIGINT,
+    name: Sequelize.STRING,
     user_id: Sequelize.BIGINT,
     created_on: Sequelize.DATE,
     is_public: Sequelize.BOOLEAN,

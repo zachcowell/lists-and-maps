@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
   var Admin = sequelize.define('admin', {
-    id: Sequelize.BIGINT,
+    //id: Sequelize.BIGINT,
     user_id: Sequelize.BIGINT
   }, 
   {

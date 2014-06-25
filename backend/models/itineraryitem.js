@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
   var ItineraryItem = sequelize.define('ItineraryItem', {
-    id: Sequelize.BIGINT,
+    //id: Sequelize.BIGINT,
     itinerary_id: Sequelize.BIGINT,
     place_id: Sequelize.BIGINT,
     is_deleted: Sequelize.BOOLEAN,

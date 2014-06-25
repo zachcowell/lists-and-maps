@@ -17,8 +17,10 @@ module.exports = function(app, passport) {
 	app.get('/find', userAPI.findAllUsers);
 	//app.get('*', routes.index);
 
-	app.get('/lists',isLoggedIn,listAPI.findLists);
+	app.get('/lists',isLoggedIn,listAPI.findAllLists);
+	app.get('/lists/create',isLoggedIn,listAPI.createList);
 	
+
 	app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });
 	app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 	app.get('/auth/facebook/callback',
