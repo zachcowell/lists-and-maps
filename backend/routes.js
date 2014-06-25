@@ -19,7 +19,8 @@ module.exports = function(app, passport) {
 
 	app.get('/lists',isLoggedIn,listAPI.findAllLists);
 	app.get('/lists/create',isLoggedIn,listAPI.createList);
-	
+	app.get('/lists/item/create',isLoggedIn,listAPI.createListItem);
+		
 
 	app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });
 	app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
