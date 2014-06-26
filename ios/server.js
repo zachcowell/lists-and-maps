@@ -1,4 +1,5 @@
-var connect = require('connect');
-connect.createServer(
-    connect.static(__dirname)
-).listen(8080);
+var connect = require('connect'); 
+var serveStatic = require('serve-static'); 
+var app = connect(); 
+app.use(serveStatic('www')); 
+app.listen(5000);
