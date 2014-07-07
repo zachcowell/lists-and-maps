@@ -1,13 +1,29 @@
-// Ionic Starter App
+var LAM = angular.module('lamApp', [
+  'ionic',
+  'lamApp.controllers',
+  //'ngRoute',
+  //'lamApp.filters',
+  //'fsCordova',
+  //'ngAnimate',
+  'leaflet-directive'
+]);
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('lamApp.controllers', []);
 
-.run(function($ionicPlatform) {
+LAM.service('sharedProperties', function () {
+    var obj = 
+        { 
+          //serverPrefix: 'http://healthi.herokuapp.com',
+          serverPrefix: 'http://localhost:3000'//,
+          //lastSearch: 'am'
+        };
+
+    return {
+        getProperty: function (property) { return obj[property]; },
+        setProperty: function(property,value) { obj[property] = value; },
+        getServerPrefix: function(){ return this.getProperty('serverPrefix'); } //because im lazy
+    };
+}).run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,66 +35,40 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
-})
+});
 
-.config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
+LAM.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-
-    // setup an abstract state for the tabs directive
     .state('tab', {
       url: "/tab",
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
-
-    // Each tab has its own nav history stack:
-
-    .state('tab.dash', {
-      url: '/dash',
+    .state('tab.search', {
+      url: "/search",
+      views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } }) 
+    .state('tab.login', {
+      url: "/login",
+      views: {'tab-login' :{ templateUrl: "templates/login.html", controller: "CtrlLogin" } } })    
+    .state('tab.more', {
+      url: "/more",
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
+        'tab-more' :{
+          templateUrl: "templates/more.html"
         }
       }
     })
-
-    .state('tab.friends', {
-      url: '/friends',
+    .state('tab.faq', {
+      url: "/more/faq",
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
+        'tab-more' :{
+          templateUrl: "templates/faq.html"
         }
       }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
-
-    .state('tab.account', {
-      url: '/account',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
-        }
-      }
-    })
-
+    });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
-
+  $urlRouterProvider.otherwise('/tab/login');
 });
+
 
