@@ -40,35 +40,12 @@ LAM.service('sharedProperties', function () {
 
 LAM.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
-    .state('tab.search', {
-      url: "/search",
-      views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } }) 
-    .state('tab.login', {
-      url: "/login",
-      views: {'tab-login' :{ templateUrl: "templates/login.html", controller: "CtrlLogin" } } })    
-    .state('tab.more', {
-      url: "/more",
-      views: {
-        'tab-more' :{
-          templateUrl: "templates/more.html"
-        }
-      }
-    })
-    .state('tab.faq', {
-      url: "/more/faq",
-      views: {
-        'tab-more' :{
-          templateUrl: "templates/faq.html"
-        }
-      }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/login');
+    .state('login', {url: "/login", templateUrl: "templates/login.html", controller: 'CtrlLogin'}) 
+    .state('tab', {url: "/tab", abstract: true, templateUrl: "templates/tabs.html"})
+    .state('tab.search', {url: "/search", views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } })
+    .state('tab.more', {url: "/more", views: {'tab-more' :{templateUrl: "templates/more.html"} } }) 
+    .state('tab.faq', {url: "/more/faq", views: {'tab-more' :{templateUrl: "templates/faq.html"} } }); 
+  $urlRouterProvider.otherwise('/login');
 });
 
 
