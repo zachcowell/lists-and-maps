@@ -8,12 +8,24 @@ var express = 			require('express'),
 var env = 'development';
 require('./config/passport')(passport);
 
-var allowCrossDomain = function(req, res, next) {
+/*var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
-}
+}*/
+
+app.use(function(req, res, next) {
+res.header('Access-Control-Allow-Credentials', true);
+res.header('Access-Control-Allow-Origin', req.headers.origin);
+res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+if ('OPTIONS' == req.method) {
+     res.send(200);
+ } else {
+     next();
+ }
+});
 
 app.configure(function(){
 	app.set('env',env);
@@ -27,7 +39,7 @@ app.configure(function(){
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 
-	app.use(allowCrossDomain);
+	//app.use(allowCrossDomain);
 
 	app.use(express.methodOverride());
 	app.use(express.static(path.join(__dirname, 'public')));

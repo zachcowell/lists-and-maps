@@ -1,7 +1,7 @@
 var LAM = angular.module('lamApp', [
   'ionic',
   'lamApp.controllers',
-  //'ngRoute',
+  'ngResource',
   //'lamApp.filters',
   //'fsCordova',
   //'ngAnimate',
