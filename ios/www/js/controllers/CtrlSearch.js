@@ -6,7 +6,7 @@ angular.module('lamApp.controllers')
 
   $scope.performSearch = function() {
     console.log(serverPrefix+'/search')
-    $http.get(serverPrefix+'/search')     
+    $http.get(serverPrefix+'/search',{withCredentials: true})     
     .success(function (data, status, headers, config) { 
       console.log(data)
     })
