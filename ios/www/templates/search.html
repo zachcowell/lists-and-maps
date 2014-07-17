@@ -3,5 +3,22 @@
 	<button class="button button-assertive" ng-click="performSearch()">
 		do search
 	</button>
+
+	<div class="list">
+		<div ng-repeat="x in results">
+			<a class="item item-thumbnail-left" href="#">
+			  <img src="{{x.image_url}}">
+			  <h2>{{x.name}}</h2>
+			  <img src="{{x.rating_img_url}}"><p>{{x.review_count}} reviews</p>
+			  <p>
+			  	<span ng-repeat="c in x.categories">
+			  		{{c[0]}}
+			  	</span>
+			  </p>
+			  <!--<p>Nine Inch Nails</p>-->
+			</a>
+		</div>
+	</div>
+
   </ion-content>
 </ion-view>
