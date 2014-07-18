@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
 	}
 
 	app.get('/', function(req, res) { res.send("root; make a selection"); });
-	app.get('/search', isLoggedIn, api.yelpSearch);
+	app.get('/search/:term', isLoggedIn, api.yelpSearch);
 	app.get('/find', userAPI.findAllUsers);
 	//app.get('*', routes.index);
 

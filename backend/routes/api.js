@@ -9,7 +9,8 @@ var yelp = require("yelp").createClient({
 
 
 exports.yelpSearch = function(req,res){
-	yelp.search({term: "food", location: "Washington DC"}, function(error, data) {
+	var term = req.params.term;
+	yelp.search({term: term, location: "Washington DC"}, function(error, data) {
 		if (!error){ res.send(data); }
 	});
 }

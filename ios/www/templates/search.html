@@ -1,8 +1,18 @@
 <ion-view title="Search">
   <ion-content class="has-header vc padding">  
-	<button class="button button-assertive" ng-click="performSearch()">
-		do search
-	</button>
+
+  <div class="list">
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Search" ng-model="searchString.text">
+    </label>
+    <button class="button button-small" ng-click="performSearch()">
+      Search
+    </button>
+  </div>
+
+</div>
 
 	<div class="list">
 		<div ng-repeat="x in results">

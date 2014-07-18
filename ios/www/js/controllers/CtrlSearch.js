@@ -2,12 +2,11 @@ angular.module('lamApp.controllers')
 .controller('CtrlSearch', 
   function($scope,$http,$stateParams,$filter,sharedProperties,$location,$ionicLoading) {
     var serverPrefix = sharedProperties.getServerPrefix();
-
+    $scope.searchString = {text:''};
     $scope.results = [];
 
   $scope.performSearch = function() {
-    console.log(serverPrefix+'/search')
-    $http.get(serverPrefix+'/search',{withCredentials: true})     
+    $http.get(serverPrefix+'/search/' + $scope.searchString.text,{withCredentials: true})     
     .success(function (data, status, headers, config) { 
       console.log(data);
       $scope.results = data.businesses;
