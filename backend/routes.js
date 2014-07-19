@@ -14,6 +14,8 @@ module.exports = function(app, passport) {
 
 	app.get('/', function(req, res) { res.send("root; make a selection"); });
 	app.get('/search/:term', isLoggedIn, api.yelpSearch);
+	app.get('/business/:id', isLoggedIn, api.yelpBusiness);
+	app.get('/search', isLoggedIn, api.yelpSearchEmpty);
 	app.get('/find', userAPI.findAllUsers);
 	//app.get('*', routes.index);
 

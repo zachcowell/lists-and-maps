@@ -16,7 +16,7 @@
 
 	<div class="list">
 		<div ng-repeat="x in results">
-			<a class="item item-thumbnail-left" href="#">
+			<a class="item item-thumbnail-left" href="#/tab/business/{{x.id}}">
 			  <img src="{{x.image_url}}">
 			  <h2>{{x.name}}</h2>
 			  <img src="{{x.rating_img_url}}"><p>{{x.review_count}} reviews</p>

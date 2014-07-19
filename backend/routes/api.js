@@ -14,3 +14,16 @@ exports.yelpSearch = function(req,res){
 		if (!error){ res.send(data); }
 	});
 }
+
+exports.yelpSearchEmpty = function(req,res){
+	yelp.search({ location: "Washington DC"}, function(error, data) {
+		if (!error){ res.send(data); }
+	});
+}
+
+exports.yelpBusiness = function(req,res){
+	var id = req.params.id;
+	yelp.business(id, function(error, data) {
+		if (!error){ res.send(data); }
+	});
+}

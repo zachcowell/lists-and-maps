@@ -43,6 +43,7 @@ LAM.config(function($stateProvider, $urlRouterProvider) {
     .state('login', {url: "/login", templateUrl: "templates/login.html", controller: 'CtrlLogin'}) 
     .state('tab', {url: "/tab", abstract: true, templateUrl: "templates/tabs.html"})
     .state('tab.search', {url: "/search", views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } })
+    .state('tab.business', {url: "/business/:id", views: {'tab-search' :{templateUrl: "templates/business.html", controller: "CtrlBusiness"} } })
     .state('tab.more', {url: "/more", views: {'tab-more' :{templateUrl: "templates/more.html"} } }) 
     .state('tab.faq', {url: "/more/faq", views: {'tab-more' :{templateUrl: "templates/faq.html"} } }); 
   $urlRouterProvider.otherwise('/login');

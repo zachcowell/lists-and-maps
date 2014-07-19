@@ -1,22 +1,18 @@
 angular.module('lamApp.controllers')
-.controller('CtrlSearch', 
+.controller('CtrlBusiness', 
   function($scope,$http,$stateParams,$ionicLoading,$filter,sharedProperties,$location,$ionicLoading) {
     var serverPrefix = sharedProperties.getServerPrefix();
-    $scope.searchString = {text:''};
-    $scope.results = [];
-
-  $scope.performSearch = function() {
+    var businessId = $stateParams.id;
+    var businessSearch = function() {
     $ionicLoading.show({ template: 'Loading...' });
-    $http.get(serverPrefix+'/search/' + $scope.searchString.text,{withCredentials: true})     
+    $http.get(serverPrefix+'/business/' + businessId,{withCredentials: true})     
     .success(function (data, status, headers, config) { 
       $ionicLoading.hide();
-      $scope.results = data.businesses;
+      console.log(data);
     })
     .error(function (data, status, headers, config) { 
     $ionicLoading.hide();
   });
-  };
-
-
+  }();
 
 });
