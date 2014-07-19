@@ -5,9 +5,7 @@ exports.findAllLists = function(req,res){
 	models.List.findAll({
 		where: {user_id: req.user}
 	}).success(function(lists) {
-		res.send('success');
-		// project will be the first entry of the Projects table with the title 'aProject' || null
-		// project.title will contain the name of the project
+		res.send(lists);
 	});
 }
 
