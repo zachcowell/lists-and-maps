@@ -1,19 +1,22 @@
 <ion-view title="Search">
-  <ion-content class="has-header vc padding">  
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
+		<h1 class="title">Search</h1>
+	</ion-nav-bar>
+	<ion-content class="has-header vc padding">  
 
-  <div class="list">
+	<div class="list">
 
-  <div class="item item-input-inset">
-    <label class="item-input-wrapper">
-      <input type="text" placeholder="Search" ng-model="searchString.text">
-    </label>
-    <button class="button button-small" ng-click="performSearch()">
-      Search
-    </button>
-  </div>
+	<div class="item item-input-inset">
+		<label class="item-input-wrapper">
+		  <input type="text" placeholder="Search" ng-model="searchString.text">
+		</label>
+		<button class="button button-small" ng-click="performSearch()">
+		  Search
+		</button>
+	</div>
 
 </div>
-
 	<div class="list">
 		<div ng-repeat="x in results">
 			<a class="item item-thumbnail-left" href="#/tab/business/{{x.id}}">
