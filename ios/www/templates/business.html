@@ -1,13 +1,12 @@
-<ion-view>
-	<ion-nav-bar class="bar-positive">
-		<ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
-		<h1 class="title">Place</h1>
-	</ion-nav-bar>
+<ion-view title="Place">
+	<ion-nav-buttons side="right">
+		<button class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
 	<ion-content class="has-header vc padding">  
 		<h2>{{business.name}}</h2>
 		<img src="{{business.rating_img_url}}">
 		<p>{{business.review_count}} reviews</p>
-		<a href="#/tab/list/add/{{x.id}}" class="button button-positive">
+		<a href="#/tab/add/list/{{x.id}}" class="button button-positive">
 		Add to List
 		</a>
 		<a href="#" class="button button-positive">

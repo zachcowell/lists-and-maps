@@ -12,7 +12,20 @@ exports.findAllLists = function(req,res){
 exports.createList = function(req,res){
 	var newList = models.List.build({
 		user_id: parseInt(req.user),
-		name: "some list i made", //req param
+		name: req.body.listName,
+		created_on: new Date(), 
+		is_public: true, //default?
+		is_deleted: false
+	})
+	.save()
+	.success(function(){ res.send('successfully saved newlist'); })
+	.error(function(error){res.send(error); });
+}
+
+exports.createListWithItem = function(req,res){
+	var newList = models.List.build({
+		user_id: parseInt(req.user),
+		name: req.body.listName,
 		created_on: new Date(), 
 		is_public: true, //default?
 		is_deleted: false

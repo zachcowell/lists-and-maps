@@ -1,5 +1,5 @@
 angular.module('lamApp.controllers')
-.controller('CtrlAddToList', 
+.controller('CtrlAddToNewList', 
   function($scope,$http,$stateParams,$ionicLoading,$filter,sharedProperties,$location,$ionicLoading) {
     var serverPrefix = sharedProperties.getServerPrefix();
     var businessId = $stateParams.id;
