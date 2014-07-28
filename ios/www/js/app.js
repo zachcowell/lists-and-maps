@@ -45,7 +45,7 @@ LAM.config(function($stateProvider, $urlRouterProvider) {
     .state('tab.search', {url: "/search", views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } })
     .state('tab.business', {url: "/business/:id", views: {'tab-search' :{templateUrl: "templates/business.html", controller: "CtrlBusiness"} } })
     .state('tab.listsHome', {url: "/list", views: {'tab-list' :{templateUrl: "templates/listHome.html", controller: "CtrlList"} } })
-    //.state('tab.listsCreate', {url: "/list/create", views: {'tab-list' :{templateUrl: "templates/listsHome.html", controller: "CtrlLists"} } })
+    .state('tab.listsCreate', {url: "/list/create", views: {'tab-list' :{templateUrl: "templates/createNewList.html", controller: "CtrlCreateList"} } })
     
     .state('tab.addToList', {url: "/add/list/:id", views: {'tab-search' :{templateUrl: "templates/addToList.html", controller: "CtrlAddToList"} } })
     .state('tab.addToNewList', {url: "/add/new/list/:id", views: {'tab-search' :{templateUrl: "templates/addToNewList.html", controller: "CtrlAddToNewList"} } })

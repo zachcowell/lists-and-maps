@@ -4,7 +4,6 @@ angular.module('lamApp.controllers')
     var serverPrefix = sharedProperties.getServerPrefix();
     var businessId = $stateParams.id;
     $scope.userData = {};
-    console.log('stuff')
     var loadLists = function(){
       $ionicLoading.show({ template: 'Loading...' });
       $http.get(serverPrefix+'/lists/',{withCredentials: true})     

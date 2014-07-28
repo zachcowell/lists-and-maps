@@ -1,9 +1,14 @@
 <ion-view title="Lists">
 	<ion-content class="has-header vc padding">
 		<ion-nav-buttons side="right">
-			<a href="#/tab/add/new/list/{{x.id}}" class="button button-icon icon ion-plus"></a>
+			<a href="#/tab/list/create" class="button button-icon icon ion-plus"></a>
 		</ion-nav-buttons>
-		<p>All lists here</p>
+		
+	<div class="list">
+		<div ng-repeat="x in userData.lists">			
+		  <h2>{{x.name}}</h2>
+		</div>
+	</div>
 
 	</ion-content>
 </ion-view>
