@@ -1,19 +1,13 @@
 angular.module('lamApp.controllers')
 .controller('CtrlCreateList', 
-  function($scope,$http,$window,$stateParams,$ionicLoading,$filter,sharedProperties,$location,$ionicLoading) {
+  function($scope,$http,$window,$stateParams,$ionicLoading,$filter,$location,$ionicLoading,sharedProperties,listService) {
     var serverPrefix = sharedProperties.getServerPrefix();
     $scope.listData = { listName: "" }; 
-    $scope.createList = function(){
-    	console.log($scope.listData.listName);
-    	$ionicLoading.show({ template: 'Loading...' });
-		$http.post(serverPrefix+'/lists/create/',{listName: $scope.listData.listName},{withCredentials: true})     
-	    .success(function (data, status, headers, config) { 
-	      $ionicLoading.hide();
-	      $window.location.href = '/#/tab/list';
-	    })
-	    .error(function (data, status, headers, config) { 
-	      $ionicLoading.hide();
-	    });
-    }
+    
+    var successCallback = function(){ $window.location.href = '/#/tab/list'; }
+    var errorCallback = function() { console.log('err'); }
+    
+    $scope.createList = function(){ listService.createList($scope.listData.listName,successCallback,errorCallback); }
+
 
 });

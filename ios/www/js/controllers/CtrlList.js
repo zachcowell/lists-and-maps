@@ -1,18 +1,9 @@
 angular.module('lamApp.controllers')
 .controller('CtrlList', 
-  function($scope,$http,$stateParams,$ionicLoading,$filter,sharedProperties,$location,$ionicLoading) {
+  function($scope,$http,$stateParams,$ionicLoading,$filter,$location,$ionicLoading,listService,sharedProperties) {
     var serverPrefix = sharedProperties.getServerPrefix();
     $scope.userData = {};
-    var loadLists = function(){
-      $ionicLoading.show({ template: 'Loading...' });
-      $http.get(serverPrefix+'/lists/',{withCredentials: true})     
-      .success(function (data, status, headers, config) { 
-        $ionicLoading.hide();
-        $scope.userData.lists = data;
-      })
-      .error(function (data, status, headers, config) { 
-        $ionicLoading.hide();
-        console.log('err');
-      });
-    }();
+    var successCallback = function(data) { $scope.userData.lists = data; }
+    var errorCallback = function(data) { console.log('error' + data); }
+    listService.getLists(successCallback,errorCallback);
 });

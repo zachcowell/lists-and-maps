@@ -1,6 +1,7 @@
 var LAM = angular.module('lamApp', [
   'ionic',
   'lamApp.controllers',
+  'lamApp.services',
   'ngResource',
   //'lamApp.filters',
   //'fsCordova',
@@ -8,22 +9,11 @@ var LAM = angular.module('lamApp', [
   'leaflet-directive'
 ]);
 
+angular.module('lamApp.services', []);
 angular.module('lamApp.controllers', []);
 
-LAM.service('sharedProperties', function () {
-    var obj = 
-        { 
-          //serverPrefix: 'http://healthi.herokuapp.com',
-          serverPrefix: 'http://localhost:3000'//,
-          //lastSearch: 'am'
-        };
 
-    return {
-        getProperty: function (property) { return obj[property]; },
-        setProperty: function(property,value) { obj[property] = value; },
-        getServerPrefix: function(){ return this.getProperty('serverPrefix'); } //because im lazy
-    };
-}).run(function($ionicPlatform) {
+LAM.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
