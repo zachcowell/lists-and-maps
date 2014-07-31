@@ -30,17 +30,17 @@ LAM.run(function($ionicPlatform) {
 
 LAM.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('login', {url: "/login", templateUrl: "templates/login.html", controller: 'CtrlLogin'}) 
-    .state('tab', {url: "/tab", abstract: true, templateUrl: "templates/tabs.html"})
-    .state('tab.search', {url: "/search", views: {'tab-search' :{templateUrl: "templates/search.html", controller: "CtrlSearch"} } })
-    .state('tab.business', {url: "/business/:id", views: {'tab-search' :{templateUrl: "templates/business.html", controller: "CtrlBusiness"} } })
-    .state('tab.listsHome', {url: "/list", views: {'tab-list' :{templateUrl: "templates/listHome.html", controller: "CtrlList"} } })
-    .state('tab.listsCreate', {url: "/list/create", views: {'tab-list' :{templateUrl: "templates/createNewList.html", controller: "CtrlCreateList"} } })
+    .state('login', {url: "/login", templateUrl: "templates/Application/Login.html", controller: 'CtrlLogin'}) 
+    .state('tab', {url: "/tab", abstract: true, templateUrl: "templates/Application/Tabs.html"})
+    .state('tab.search', {url: "/search", views: {'tab-search' :{templateUrl: "templates/Search/Home.html", controller: "CtrlSearch"} } })
+    .state('tab.business', {url: "/business/:id", views: {'tab-search' :{templateUrl: "templates/Business/Home.html", controller: "CtrlBusiness"} } })
+    .state('tab.listsHome', {url: "/list", views: {'tab-list' :{templateUrl: "templates/List/Home.html", controller: "CtrlList"} } })
+    .state('tab.listsCreate', {url: "/list/create", views: {'tab-list' :{templateUrl: "templates/List/Create.html", controller: "CtrlCreateList"} } })
     
-    .state('tab.addToList', {url: "/add/list/:id", views: {'tab-search' :{templateUrl: "templates/addToList.html", controller: "CtrlAddToList"} } })
-    .state('tab.addToNewList', {url: "/add/new/list/:id", views: {'tab-search' :{templateUrl: "templates/addToNewList.html", controller: "CtrlAddToNewList"} } })
-    .state('tab.more', {url: "/more", views: {'tab-more' :{templateUrl: "templates/more.html"} } }) 
-    .state('tab.faq', {url: "/more/faq", views: {'tab-more' :{templateUrl: "templates/faq.html"} } }); 
+    .state('tab.addToList', {url: "/add/list/:id", views: {'tab-search' :{templateUrl: "templates/List/Home.html", controller: "CtrlAddToList"} } })
+    .state('tab.addToNewList', {url: "/add/new/list/:id", views: {'tab-search' :{templateUrl: "templates/Business/AddToNewList.html", controller: "CtrlAddToNewList"} } })
+    .state('tab.more', {url: "/more", views: {'tab-more' :{templateUrl: "templates/More/Home.html"} } }) 
+    .state('tab.faq', {url: "/more/faq", views: {'tab-more' :{templateUrl: "templates/More/FAQ.html"} } }); 
   $urlRouterProvider.otherwise('/login');
 });
 
