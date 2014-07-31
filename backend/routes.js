@@ -20,6 +20,7 @@ module.exports = function(app, passport) {
 	//app.get('*', routes.index);
 
 	app.get('/lists',isLoggedIn,listAPI.findAllLists);
+	app.get('/list/:id',isLoggedIn,listAPI.findList);
 	app.post('/lists/create',isLoggedIn,listAPI.createList);
 	app.post('/lists/createWithItem/',isLoggedIn,listAPI.createListWithItem);
 	app.get('/lists/item/create',isLoggedIn,listAPI.createListItem);

@@ -9,6 +9,17 @@ exports.findAllLists = function(req,res){
 	});
 }
 
+exports.findList = function(req,res){
+	models.List.findAll({
+		where: {
+			user_id: req.user,
+			id: req.params.id
+		}
+	}).success(function(lists) {
+		res.send(lists);
+	});
+}
+
 exports.createList = function(req,res){
 	var newList = models.List.build({
 		user_id: parseInt(req.user),

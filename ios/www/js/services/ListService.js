@@ -7,6 +7,11 @@ angular.module('lamApp.services')
             .success(success)
             .error(error);
         },
+        getList: function(id,success,error){
+          $http.get(serverPrefix+'/list/'+id,{withCredentials: true})     
+            .success(success)
+            .error(error);
+        },
         createList: function(name,success,error){
           $http.post(serverPrefix+'/lists/create/',{listName: name},{withCredentials: true})     
             .success(success)
