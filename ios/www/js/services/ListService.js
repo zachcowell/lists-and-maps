@@ -16,6 +16,9 @@ angular.module('lamApp.services')
           $http.post(serverPrefix+'/lists/create/',{listName: name},{withCredentials: true})     
             .success(success)
             .error(error);
+        },
+        addItemToList: function(dataObject,success,error){
+            
         }
     };
 });

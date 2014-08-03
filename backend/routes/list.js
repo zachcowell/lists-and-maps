@@ -50,7 +50,29 @@ exports.createListItem = function(req,res){
 	/* 
 		Step 1: Find or Create place with req yelp id 
 	   	Step 2: use the returned id to create new list item
+		Later: abstract List and Place away from each other and make this more modular
 	*/
+
+	var yelpBusinessId = req.body.yelp.id;
+
+	models.Place
+		.findOrCreate({ yelp_biz_id: yelpBusinessId }, { 
+			name: req.body.yelp.name,
+			street_address1: req.body.yelp.location.address,
+			street_address2: null,
+			zip: req.body.yelp.location.postal_code,
+			state: req.body.yelp.location.state_code,
+			lat: req.body.yelp.location.coordinate.latitude,
+			lng: req.body.yelp.location.coordinate.longitude
+		 })
+		.success(function(place, created) {
+			console.log(place.values);
+			console.log(created);
+  		});
+
+
+
+
 	var newList = models.ListItem.build({
 		list_id : 1,//req param
 		place_id: 4234 //req param
