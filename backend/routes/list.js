@@ -52,32 +52,42 @@ exports.createListItem = function(req,res){
 	   	Step 2: use the returned id to create new list item
 		Later: abstract List and Place away from each other and make this more modular
 	*/
+	var yelpPlaceData = req.body.yelp;
+	var listItemData = req.body.listItem;
 
-	var yelpBusinessId = req.body.yelp.id;
+	var authorizeListCreation = function(successCallback){
+		models.List.find({user_id: parseInt(req.user), id: listItemData.listId })
+			.success(successCallback);
+	};
 
-	models.Place
-		.findOrCreate({ yelp_biz_id: yelpBusinessId }, { 
-			name: req.body.yelp.name,
-			street_address1: req.body.yelp.location.address,
-			street_address2: null,
-			zip: req.body.yelp.location.postal_code,
-			state: req.body.yelp.location.state_code,
-			lat: req.body.yelp.location.coordinate.latitude,
-			lng: req.body.yelp.location.coordinate.longitude
-		 })
-		.success(function(place, created) {
-			console.log(place.values);
-			console.log(created);
-  		});
+	var createListItemWhenAuthorized = function(list){
 
+		var placeCreationOrDiscovery = function(successCallback){
+			models.Place
+				.findOrCreate({ yelp_biz_id: yelpPlaceData.id }, { 
+					name: yelpPlaceData.name,
+					street_address1: yelpPlaceData.location.address,
+					street_address2: null,
+					zip: yelpPlaceData.location.postal_code,
+					state: yelpPlaceData.location.state_code,
+					lat: yelpPlaceData.location.coordinate.latitude,
+					lng: yelpPlaceData.location.coordinate.longitude
+				 })
+				.success(successCallback);
+		};
 
+		var listItemCreation = function(place){
+			var newListItem = models.ListItem.build({
+				list_id : list.id,
+				place_id: place.id 
+			})
+			.save()
+			.success(function(){ res.send('successfully saved list item'); });
+			//.error(function(error){res.send(error); });
+		};
+		if (typeof list != 'undefined') { placeCreationOrDiscovery(listItemCreation); }
+		else { console.log('No list found') }
+	};
 
-
-	var newList = models.ListItem.build({
-		list_id : 1,//req param
-		place_id: 4234 //req param
-	})
-	.save()
-	.success(function(){ res.send('successfully saved list item'); })
-	.error(function(error){res.send(error); });
+	authorizeListCreation(createListItemWhenAuthorized);
 }
