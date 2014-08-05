@@ -52,7 +52,7 @@ exports.createListItem = function(req,res){
 	   	Step 2: use the returned id to create new list item
 		Later: abstract List and Place away from each other and make this more modular
 	*/
-	var yelpPlaceData = req.body.yelp;
+	var placeData = req.body.place;
 	var listItemData = req.body.listItem;
 
 	var authorizeListCreation = function(successCallback){
@@ -64,14 +64,14 @@ exports.createListItem = function(req,res){
 
 		var placeCreationOrDiscovery = function(successCallback){
 			models.Place
-				.findOrCreate({ yelp_biz_id: yelpPlaceData.id }, { 
-					name: yelpPlaceData.name,
-					street_address1: yelpPlaceData.location.address,
-					street_address2: null,
-					zip: yelpPlaceData.location.postal_code,
-					state: yelpPlaceData.location.state_code,
-					lat: yelpPlaceData.location.coordinate.latitude,
-					lng: yelpPlaceData.location.coordinate.longitude
+				.findOrCreate({ yelp_biz_id: placeData.yelp_biz_id }, { 
+					name: placeData.name,
+					street_address1: placeData.street_address1,
+					street_address2: placeData.street_address2,
+					zip: placeData.zip,
+					state: placeData.state,
+					lat: placeData.lat,
+					lng: placeData.lng
 				 })
 				.success(successCallback);
 		};

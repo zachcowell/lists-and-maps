@@ -1,12 +1,12 @@
 angular.module('lamApp.controllers')
 .controller('CtrlAddToList', 
-  function($scope,$http,$stateParams,$ionicLoading,$filter,$location,$ionicLoading,sharedProperties,listService) {
+  function($scope,$http,$stateParams,$ionicLoading,$filter,$location,$ionicLoading,sharedProperties,listService, BusinessService) {
     var serverPrefix = sharedProperties.getServerPrefix();
     var businessId = $stateParams.id;
-    console.log(businessId);
+    var cachedBusiness = BusinessService.getCachedBusiness();
     $scope.userData = {};
     var linkActionMap = function(item) { 
-    	//item.linkAction = '#/tab/list/view/' + item.id; 
+//        item.linkAction = '#/tab/list/view/' + item.id; 
 
     }
     var successCallback = function(data) { 
@@ -18,7 +18,12 @@ angular.module('lamApp.controllers')
 
 
     var addToListTest = function(){
-
-    	listService.addItemToList()
+    	var obj = 
+        { 
+            place: listService.yelpBusinessObjectConversion(cachedBusiness),
+            listItem: ''
+        }
+        
+        //listService.addItemToList(place,null,null);
     }
 });
