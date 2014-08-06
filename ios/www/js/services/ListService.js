@@ -25,10 +25,11 @@ angular.module('lamApp.services')
         yelpBusinessObjectConversion : function(yelpObject){
             return {
                 name: yelpObject.name,
-                street_address1: yelpObject.location.address,
+                street_address1: yelpObject.location.address[0],
                 street_address2: null,
                 zip: yelpObject.location.postal_code,
                 state: yelpObject.location.state_code,
+                yelp_biz_id: yelpObject.id,
                 lat: yelpObject.location.coordinate.latitude,
                 lng: yelpObject.location.coordinate.longitude
             }
