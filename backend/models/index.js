@@ -23,17 +23,22 @@ models.forEach(function(model) { module.exports[model] = sequelize.import(__dirn
 (function(m) {
   m.User.hasMany(m.Itinerary,{ foreignKey: 'user_id' });
   m.User.hasMany(m.List,{ foreignKey: 'user_id' });
+
   m.User.hasMany(m.Logs);
   m.User.hasMany(m.Admin);
   m.User.hasOne(m.UserPreferences);
   m.Itinerary.hasMany(m.ItineraryItem);
   m.Itinerary.belongsTo(m.User,{ foreignKey: 'user_id' });
-  m.ItineraryItem.hasOne(m.Place);
+  
+  m.ItineraryItem.belongsTo(m.Place,{ foreignKey: 'place_id' });
   m.ItineraryItem.belongsTo(m.Itinerary);
-  m.Place.belongsTo(m.ListItem);
-  m.Place.belongsTo(m.ItineraryItem);
+
+  //itinerary items are probs broken, fix this shit later
+  m.Place.hasOne(m.ListItem,{ foreignKey: 'place_id' });
+  m.Place.hasOne(m.ItineraryItem,{ foreignKey: 'place_id' });
   m.ListItem.belongsTo(m.List,{ foreignKey: 'list_id' });
-  m.ListItem.hasOne(m.Place);
+  m.ListItem.belongsTo(m.Place,{ foreignKey: 'place_id' });
+
   m.List.hasMany(m.ListItem,{ foreignKey: 'list_id' });
   m.List.belongsTo(m.User,{ foreignKey: 'user_id' });
   m.Admin.belongsTo(m.User);

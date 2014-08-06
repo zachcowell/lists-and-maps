@@ -23,7 +23,7 @@ module.exports = function(app, passport) {
 	app.get('/list/:id',isLoggedIn,listAPI.findList);
 	app.post('/lists/create',isLoggedIn,listAPI.createList);
 	app.post('/lists/createWithItem/',isLoggedIn,listAPI.createListWithItem);
-	app.get('/lists/item/create',isLoggedIn,listAPI.createListItem);
+	app.post('/lists/item/create',isLoggedIn,listAPI.createListItem);
 		
 
 	app.get('/profile', isLoggedIn, function(req, res) { res.send(req.user); });

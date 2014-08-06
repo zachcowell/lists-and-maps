@@ -14,7 +14,8 @@ exports.findList = function(req,res){
 		where: {
 			user_id: req.user,
 			id: req.params.id
-		}
+		},
+		include: [ { model: models.ListItem, include: [models.Place] } ]
 	}).success(function(lists) {
 		res.send(lists);
 	});

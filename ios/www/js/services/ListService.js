@@ -18,7 +18,7 @@ angular.module('lamApp.services')
             .error(error);
         },
         addItemToList: function(dataObject,success,error){
-        $http.post(serverPrefix+'/createListItem',{place: dataObject.place,listItem: dataObject.listItem},{withCredentials: true})     
+        $http.post(serverPrefix+'/lists/item/create',{place: dataObject.place,listItem: dataObject.listItem},{withCredentials: true})     
             .success(success)
             .error(error);  
         },

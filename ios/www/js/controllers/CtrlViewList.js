@@ -4,7 +4,12 @@ angular.module('lamApp.controllers')
     var serverPrefix = sharedProperties.getServerPrefix();
     var listId = $stateParams.id;
     $scope.userData = {};
-    var successCallback = function(data) { $scope.userData.list = data; console.log(data); }
+    var successCallback = function(data) { 
+    	$scope.userData.list = data[0]; 
+    	console.log($scope.userData.list);
+    	//_.each($scope.userData.list.listItems,function(x){console.log(x)})
+    	//console.log($scope.userData.list); 
+    }
     var errorCallback = function(data) { console.log('error' + data); }
     listService.getList(listId,successCallback,errorCallback);
 });

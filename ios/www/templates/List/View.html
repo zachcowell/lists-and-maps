@@ -1,5 +1,14 @@
 <ion-view title="List View">
 	<ion-content class="has-header vc padding">
-	
+		<ion-nav-buttons side="right">
+			<a href="#" class="button button-icon icon ion-plus"></a>
+		</ion-nav-buttons>
+		
+	<div class="list">
+		<div ng-repeat="x in userData.list.listItems">			
+			<a class="item" href="#/tab/business/{{x.place.yelp_biz_id}}">{{x.place.name}}</a>
+		</div>
+	</div>
+
 	</ion-content>
 </ion-view>
