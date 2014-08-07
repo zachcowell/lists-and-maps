@@ -47,6 +47,14 @@ exports.createListWithItem = function(req,res){
 	.error(function(error){res.send(error); });
 }
 
+/*exports.deleteListItem = function(req,res){
+	var listItemId = req.body.listItemId;
+	var authorizeListCreation = function(successCallback){
+		models.ListItem.find({where: {id: listItemId},include: [ { model: models.List})
+		.success(successCallback);
+	}
+}*/
+
 exports.createListItem = function(req,res){
 	/* 
 		Step 1: Find or Create place with req yelp id 
@@ -55,14 +63,13 @@ exports.createListItem = function(req,res){
 	*/
 	var placeData = req.body.place;
 	var listId = req.body.list_id;
-	console.log("list id is "+ listId);
+	
 	var authorizeListCreation = function(successCallback){
 		models.List.find({where: {user_id: parseInt(req.user), id: listId }})
 			.success(successCallback);
 	};
 
 	var createListItemWhenAuthorized = function(list){
-		console.log("retrieved list was "+ list.id)
 		var placeCreationOrDiscovery = function(successCallback){
 			models.Place
 				.findOrCreate({ yelp_biz_id: placeData.yelp_biz_id }, { 

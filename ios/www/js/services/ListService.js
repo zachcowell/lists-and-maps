@@ -18,9 +18,14 @@ angular.module('lamApp.services')
             .error(error);
         },
         addItemToList: function(dataObject,success,error){
-        $http.post(serverPrefix+'/lists/item/create',dataObject,{withCredentials: true})     
-            .success(success)
-            .error(error);  
+            $http.post(serverPrefix+'/lists/item/create',dataObject,{withCredentials: true})     
+                .success(success)
+                .error(error);  
+        },
+        deleteListItem: function(id,success,error){
+            $http.post(serverPrefix+'/lists/item/delete',{listItemId: id},{withCredentials: true})     
+                .success(success)
+                .error(error);  
         },
         yelpBusinessObjectConversion : function(yelpObject){
             var obj = {

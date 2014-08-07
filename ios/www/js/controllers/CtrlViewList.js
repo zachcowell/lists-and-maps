@@ -12,4 +12,8 @@ angular.module('lamApp.controllers')
     }
     var errorCallback = function(data) { console.log('error' + data); }
     listService.getList(listId,successCallback,errorCallback);
+
+    $scope.deleteListItem = function(id){
+    	listService.deleteListItem(id);
+    }
 });

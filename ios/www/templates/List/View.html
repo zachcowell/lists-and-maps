@@ -4,10 +4,10 @@
 			<a href="#" class="button button-icon icon ion-plus"></a>
 		</ion-nav-buttons>
 		
-	<ion-list can-swipe="listCanSwipe">
+	<ion-list can-swipe="true">
 		<ion-item ng-repeat="x in userData.list.listItems">		<p>{{x.place.name}}</p>	
-<ion-option-button class="button-assertive" ng-click="edit(facility)">
-        Edit
+<ion-option-button class="button-assertive" ng-click="deleteListItem(x.id)">
+        Delete
       </ion-option-button>
 		</ion-item>
 	</ion-list>
