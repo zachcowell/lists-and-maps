@@ -54,15 +54,15 @@ exports.createListItem = function(req,res){
 		Later: abstract List and Place away from each other and make this more modular
 	*/
 	var placeData = req.body.place;
-	var listItemData = req.body.listItem;
-
+	var listId = req.body.list_id;
+	console.log("list id is "+ listId);
 	var authorizeListCreation = function(successCallback){
-		models.List.find({user_id: parseInt(req.user), id: listItemData.listId })
+		models.List.find({where: {user_id: parseInt(req.user), id: listId }})
 			.success(successCallback);
 	};
 
 	var createListItemWhenAuthorized = function(list){
-
+		console.log("retrieved list was "+ list.id)
 		var placeCreationOrDiscovery = function(successCallback){
 			models.Place
 				.findOrCreate({ yelp_biz_id: placeData.yelp_biz_id }, { 

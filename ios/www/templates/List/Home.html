@@ -5,8 +5,8 @@
 		</ion-nav-buttons>
 		
 	<div class="list">
-		<div ng-repeat="x in userData.lists">			
-			<a class="item" href="{{x.linkAction}}">{{x.name}}</a>
+		<div ng-repeat="x in userData.lists">	
+			<span class="item" ng-click="x.ngFunc()">{{x.name}}</span>
 		</div>
 	</div>
 

@@ -18,21 +18,24 @@ angular.module('lamApp.services')
             .error(error);
         },
         addItemToList: function(dataObject,success,error){
-        $http.post(serverPrefix+'/lists/item/create',{place: dataObject.place,listItem: dataObject.listItem},{withCredentials: true})     
+        $http.post(serverPrefix+'/lists/item/create',dataObject,{withCredentials: true})     
             .success(success)
             .error(error);  
         },
         yelpBusinessObjectConversion : function(yelpObject){
-            return {
+            var obj = {
                 name: yelpObject.name,
                 street_address1: yelpObject.location.address[0],
                 street_address2: null,
                 zip: yelpObject.location.postal_code,
                 state: yelpObject.location.state_code,
-                yelp_biz_id: yelpObject.id,
-                lat: yelpObject.location.coordinate.latitude,
-                lng: yelpObject.location.coordinate.longitude
+                yelp_biz_id: yelpObject.id
             }
+            if (yelpObject.location.coordinate){
+                obj.lat= yelpObject.location.coordinate.latitude,
+                obj.lng= yelpObject.location.coordinate.longitude
+            }
+            return obj;
         }
     };
 });
