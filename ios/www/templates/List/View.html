@@ -4,11 +4,11 @@
 			<a href="#" class="button button-icon icon ion-plus"></a>
 		</ion-nav-buttons>
 		
-	<div class="list">
-		<div ng-repeat="x in userData.list.listItems">			
-			<a class="item" href="#/tab/business/{{x.place.yelp_biz_id}}">{{x.place.name}}</a>
-		</div>
-	</div>
+	<ion-list can-swipe="listCanSwipe">
+		<ion-item ng-repeat="x in userData.list.listItems">		<p>Hey</p>	
+
+		</ion-item>
+	</ion-list>
 
 	</ion-content>
 </ion-view>

@@ -6,7 +6,7 @@ angular.module('lamApp.controllers')
     $scope.userData = {};
     var successCallback = function(data) { 
     	$scope.userData.list = data[0]; 
-    	console.log($scope.userData.list);
+    	
     	//_.each($scope.userData.list.listItems,function(x){console.log(x)})
     	//console.log($scope.userData.list); 
     }
